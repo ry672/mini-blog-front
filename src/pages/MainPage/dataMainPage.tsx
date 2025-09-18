@@ -1,49 +1,41 @@
 export const dataFollowers = [
     {   
         id: 1,
-        img:"./img/profile/profile-img-1.jpeg" ,
         mainText: "N E W",
         secondaryText: "Развитие",
     },
     {
         id: 2,
-        img:"./img/profile/profile-img-2.jpeg" ,
         mainText: "Aesthetics",
         secondaryText: "Стиль",
     },
     { 
         id: 3,
-        img:"./img/profile/profile-img-3.jpeg" ,
         mainText: "N E W",
         secondaryText: "Развитие",
     },
     {
         id: 4,
-        img:"./img/profile/profile-img-4.jpeg" ,
         mainText: "дом твоей эстетики",
         secondaryText: "Творчество",
     },
     {
         id: 5,
-        img:"./img/profile/profile-img-5.jpeg" ,
         mainText: "wailet",
         secondaryText: "Искусство",
     },
     {
         id: 6,
-        img:"./img/profile/profile-img-6.jpeg" ,
         mainText: "A W E S O M E",
         secondaryText: "Развитие",
     },
     {
         id: 7,
-        img:"./img/profile/profile-img-7.jpeg" ,
         mainText: "minimalism",
         secondaryText: "Фотография",
     },
     {
         id: 8,
-        img:"./img/profile/profile-img-8.jpeg" ,
         mainText: "Словарный запас",
         secondaryText: "Литература",
     },

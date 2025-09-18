@@ -23,11 +23,11 @@ const loginScheme = yup.object({
         .required("Заполни поле"),
     userPassword: yup
         .string()
-        .min(4, "Минимум четыре символа")
+        .min(6, "Минимум шесть символа")
         .required("Заполни поле"),
     userName: yup
         .string()
-        .min(2, "Минимум два символа")
+        .min(4, "Минимум четыре символа")
         .required("Заполни поле"),
     userEmail: yup
         .string()
@@ -35,7 +35,7 @@ const loginScheme = yup.object({
         .required("Заполни поле"),
     userCity: yup
         .string()
-        .min(2, "Минимум два символа")
+        .min(4, "Минимум четыре символа")
         .required("Заполни поле"),
     userUsername: yup
         .string()
@@ -75,7 +75,7 @@ export const RegistrationPage = () => {
 
     useEffect(() => {
         if (data?.status === "success" && data.user && data.access && data.refresh) {
-            // Сохраняем пользователя и токены в redux
+            
             dispatch(setUser({
                 user: data.user,
                 accessToken: data.access,
@@ -99,9 +99,9 @@ export const RegistrationPage = () => {
     };
 
     return (
-        <div>
+        <div className="bg-white px-10 py-8 rounded-xl w-screen shadow-xl max-w-sm text-center">
             
-            <Headers headerText="Регистрация" headerType="h1" />
+            <Headers headerText="Регистрация" headerType="h1" className="text-3xl font-semibold text-gray-900 m-5" />
 
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Controller
@@ -112,7 +112,7 @@ export const RegistrationPage = () => {
                             isError={!!errors.userName}
                             errorText={errors.userName?.message}
                             type="text"
-                            placeholder="Имя и Фамилия"
+                            placeholder="Имя"
                             {...field}
                         />
                     )}
@@ -125,7 +125,7 @@ export const RegistrationPage = () => {
                             isError={!!errors.userUsername}
                             errorText={errors.userUsername?.message}
                             type="text"
-                            placeholder="Имя и Фамилия"
+                            placeholder="Ведите username"
                             {...field}
                         />
                     )}
@@ -144,19 +144,7 @@ export const RegistrationPage = () => {
                     )}
                 />
 
-                <Controller
-                    name="userPassword"
-                    control={control}
-                    render={({ field }) => (
-                        <AppInput
-                            isError={!!errors.userPassword}
-                            errorText={errors.userPassword?.message}
-                            type="password"
-                            placeholder="Пароль"
-                            {...field}
-                        />
-                    )}
-                />
+                
                 <Controller
                     name="userEmail"
                     control={control}
@@ -166,6 +154,19 @@ export const RegistrationPage = () => {
                             errorText={errors.userEmail?.message}
                             type="email"
                             placeholder="Email"
+                            {...field}
+                        />
+                    )}
+                />
+                <Controller
+                    name="userPassword"
+                    control={control}
+                    render={({ field }) => (
+                        <AppInput
+                            isError={!!errors.userPassword}
+                            errorText={errors.userPassword?.message}
+                            type="password"
+                            placeholder="Пароль"
                             {...field}
                         />
                     )}
@@ -190,7 +191,7 @@ export const RegistrationPage = () => {
             </form>
 
             
-            <p className= 'text-3xl font-bold underline'>Есть аккаунт? <Link to="/">Войти</Link></p>
+            <p className="flex justify-center items-center mt-5 text-gray-700 font-medium text-base text-center">Есть аккаунт? <Link to="/" className="ml-2 text-blue-500 font-semibold text-base">Войти</Link></p>
         </div>
     );
 };

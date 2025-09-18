@@ -11,6 +11,9 @@ interface IComment {
   postId: number;
   createdAt: string;
   updatedAt: string;
+  user?: {
+    username?: string
+  }
 }
 
 export const commentApi = createApi({
@@ -29,7 +32,14 @@ export const commentApi = createApi({
     getCommentsByPostId: builder.query<IComment[], number>({
       query: (postId) => `/comments/post/${postId}`,
     }),
+    createComment: builder.mutation<IComment, { postId: number; content: string }>({
+      query: ({ postId, content }) => ({
+        url: `/comments/${postId}`,
+        method: "POST",
+        body: { content },
+      }),
+    }),
   }),
 });
 
-export const { useGetCommentsByPostIdQuery } = commentApi;
+export const { useGetCommentsByPostIdQuery, useCreateCommentMutation } = commentApi;

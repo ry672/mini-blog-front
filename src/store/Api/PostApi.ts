@@ -9,12 +9,18 @@ export interface IPost {
   content: string;
   images: string[];
   userId: number;
-  categoryId: number;
+  categoryId?: number;
   likedUserIds: number[];
   createdAt: string;
   updatedAt: string;
   likesCount: number;
   likedByUser: boolean;
+}
+
+// Новый интерфейс для параметров createPost мутации
+export interface ICreatePostParams {
+  userId: number;
+  formData: FormData;
 }
 
 export const postApi = createApi({
@@ -29,13 +35,28 @@ export const postApi = createApi({
       return headers;
     },
   }),
+  
   endpoints: (builder) => ({
     getPosts: builder.query<IPost[], void>({
       query: () => "/posts",
     }),
+    
+
+    createPost: builder.mutation<IPost, { userId: number; formData: FormData }>({
+      query: ({ userId, formData }) => ({
+        url: `/posts/${userId}`,
+        method: "POST",
+        body: formData,
+      }),
+    }),
+    getPostById: builder.query<IPost, number>({
+      query: (postId) => `/posts/${postId}`,
+    }),
   }),
 });
 
-export const { useGetPostsQuery } = postApi;
+export const { useGetPostsQuery, useCreatePostMutation, useGetPostByIdQuery } = postApi;
+
+
 
 

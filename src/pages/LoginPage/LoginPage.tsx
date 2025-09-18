@@ -56,9 +56,9 @@ export const LoginPage = () => {
   };
 
   return (
-    <div>
-      <Headers headerText="Авторизация" headerType="h1" />
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <div className="bg-white px-10 py-8 rounded-xl w-screen shadow-xl max-w-sm text-center">
+      <Headers headerText="Авторизация" headerType="h1" className="text-3xl font-semibold text-gray-900 m-5"/>
+      <form onSubmit={handleSubmit(onSubmit)}  className= "space-y-4">
         <Controller
           name="userEmail"
           control={control}
@@ -88,7 +88,14 @@ export const LoginPage = () => {
         <AppButton buttonText="Войти" buttonType="submit" disabled={isLoading} />
       </form>
       {error && <p style={{ color: "red" }}>Ошибка авторизации</p>}
-      <p style={{ marginTop: "16px" }}>Нет аккаунта? <Link to="/register">Зарегистрироваться</Link></p>
+      <p className="flex justify-center items-center mt-5 text-gray-700 font-medium text-base text-center">
+        Нет аккаунта?
+        <Link to="/register" className="ml-2 text-blue-500 font-semibold text-base">
+          Зарегистрироваться
+        </Link>
+      </p>
+
+
     </div>
   );
 };
