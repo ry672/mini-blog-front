@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import "./Header.scss";
 
 export const Header = () => {
+  const navigate =useNavigate();
 
   return (
     <header className="Header">
@@ -79,6 +81,7 @@ export const Header = () => {
           />
         </svg>
         <img
+          onClick={()=> navigate("/profile-page")}
           className="_no-select"
           src="./img/users/andrey-kashirskiy.jpeg"
           alt="Profile"

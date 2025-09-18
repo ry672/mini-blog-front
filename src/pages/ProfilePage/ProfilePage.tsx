@@ -1,6 +1,17 @@
+import { useSelector } from "react-redux";
+import { useGetUserQuery } from "../../store/Api/AuthApi";
 import "./ProfilePage.scss";
+import { selectUserID } from "../../store/userSlice/userSclice";
+import { useEffect } from "react";
 
 export const ProfilePage = () => {
+  const userId=useSelector(selectUserID);
+  const{data}=useGetUserQuery(userId as number );
+  useEffect(()=>{
+    console.log(userId);
+    
+  },[])
+  
   return (
     <div className="ProfilePage">
       <aside className="LeftSide">
@@ -249,7 +260,9 @@ export const ProfilePage = () => {
         <div className="user__block">
           <img src="./img/users/denis-frolov.jpeg" alt="Denis Frolov" />
           <div className="user__description">
-            <h1 className="user__name">Денис Фролов</h1>
+            <h1 className="user__name">
+              {data.message.name ? data.message.name : ""}
+              </h1>
             <div className="user__info">
               <div className="parameter">
                 <span className="key">Друзья</span>
