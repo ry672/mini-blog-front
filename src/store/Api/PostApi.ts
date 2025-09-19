@@ -13,8 +13,9 @@ export interface IPost {
   likedUserIds: number[];
   createdAt: string;
   updatedAt: string;
-  likesCount: number;
-  likedByUser: boolean;
+  likesCount?: number;
+  likedByUser?: boolean;
+  liked?: boolean
 }
 
 
@@ -56,11 +57,18 @@ export const postApi = createApi({
     getPostById: builder.query<IPost, number>({
       query: (postId) => `/posts/${postId}`,
     }),
+    likePost: builder.mutation <{liked: boolean; post: IPost}, number> ({
+      query: (postId) => ({
+        url: `/posts/${postId}/like`,
+        method: "POST"
+      }), invalidatesTags: ["Posts"],
+    })
+
   }),
 });
 
 
-export const { useGetPostsQuery, useCreatePostMutation, useGetPostByIdQuery, useGetPostsByUserIdQuery, } = postApi;
+export const { useGetPostsQuery, useCreatePostMutation, useGetPostByIdQuery, useGetPostsByUserIdQuery, useLikePostMutation  } = postApi;
 
 
 

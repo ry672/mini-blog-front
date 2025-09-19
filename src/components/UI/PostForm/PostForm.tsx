@@ -14,7 +14,7 @@ export const CreatePostForm = () => {
   const [formData, setFormData] = useState({
     title: "",
     content: "",
-    categoryId: "", // значение по умолчанию — пустая строка
+    categoryId: "", 
     image: null as File | null,
   });
 
@@ -33,7 +33,7 @@ export const CreatePostForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Валидация
+    
     const newErrors = {
       title: formData.title.trim() === "" ? "Введите заголовок" : "",
       content: formData.content.trim() === "" ? "Введите содержание" : "",
@@ -50,7 +50,7 @@ export const CreatePostForm = () => {
     data.append("title", formData.title);
     data.append("content", formData.content);
     if (formData.categoryId) {
-      data.append("categoryId", formData.categoryId); // оставляем строку
+      data.append("categoryId", formData.categoryId); 
     }
     if (formData.image) {
       data.append("images", formData.image);
@@ -68,7 +68,7 @@ export const CreatePostForm = () => {
     <div className="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-lg mt-8">
       <h2 className="text-2xl font-bold mb-4 text-gray-800">Создать пост</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Заголовок */}
+        
         <div>
           <label className="block text-sm font-medium text-gray-700">Заголовок *</label>
           <input
@@ -100,7 +100,7 @@ export const CreatePostForm = () => {
           {errors.content && <p className="text-red-500 text-sm mt-1">{errors.content}</p>}
         </div>
 
-        {/* Картинка */}
+        
         <div>
           <label className="block text-sm font-medium text-gray-700">Изображение</label>
           <input
@@ -111,9 +111,9 @@ export const CreatePostForm = () => {
           />
         </div>
 
-        {/* Категория */}
+        
         <div>
-          <label className="block text-sm font-medium text-gray-700">Категория (из базы)</label>
+          <label className="block text-sm font-medium text-gray-700">Категория </label>
           <select
             value={formData.categoryId}
             onChange={(e) => handleChange("categoryId", e.target.value)}
@@ -129,7 +129,7 @@ export const CreatePostForm = () => {
           </select>
         </div>
 
-        {/* Кнопка */}
+        
         <button
           type="submit"
           disabled={isLoading}

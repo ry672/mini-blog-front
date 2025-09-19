@@ -1,37 +1,43 @@
+import { CommentsListProps } from "../store/Api/Commentapi";
+import defaultAvatar from "../images/user-front-side-with-white-background.jpg";
+import { DeleteCommentButton } from "../components/UI/CommentButton/CommentButton";
+import { useGetMeQuery } from "../store/Api/UserApi";
 
-import { CommentsListProps} from "../store/Api/Commentapi";
+export const CommentsList = ({ comments }: CommentsListProps) => {
+  const { data: user, isLoading: userLoading } = useGetMeQuery();
 
-
-
-export const CommentsList = ({comments}: CommentsListProps) => {
   if (comments.length === 0) return <p>Комментариев пока нет</p>;
 
   return (
-    <div style={{ marginTop: 15, paddingLeft: 15, borderLeft: "2px solid #ddd" }}>
-      <h4>Комментарии:</h4>
+    <div>
       {comments.map((comment) => (
         <div
           key={comment.id}
-          style={{ marginBottom: 10, padding: 10, border: "1px solid #eee", borderRadius: 5, backgroundColor: "#fafafa" }}
+          className="flex flex-row justify-start items-center m-5 border border-gray-200 p-2 rounded-[10px]"
         >
           <img
-            src={comment.author?.profile_photo || "http://localhost:5000${auth?.profile_photo}"} // путь по умолчанию
+            src={comment.author?.profile_photo || defaultAvatar}
             alt="Аватар"
-            style={{
-              width: 40,
-              height: 40,
-              borderRadius: "50%",
-              objectFit: "cover",
-              border: "1px solid #ccc",
-            }}
+            className="w-10 h-10 rounded-full object-cover mr-4"
           />
-          <p>{comment.content}</p>
-          <small style={{ color: "#666" }}>{comment.author?.username || "Имя пользователя не указано"}</small>
+          <div className="flex-1">
+            <span className="text-base font-medium text-gray-800">
+              {comment.author?.username || "Имя пользователя не указано"}
+            </span>
+            <p className="text-gray-600">{comment.content}</p>
+          </div>
+          {!userLoading && user && user.id === comment.userId && (
+            <div className="ml-4">
+              <DeleteCommentButton commentId={comment.id} />
+            </div>
+          )}
         </div>
       ))}
     </div>
   );
 };
+
+
 
 
 

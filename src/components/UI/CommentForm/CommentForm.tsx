@@ -24,16 +24,16 @@ export const CommentForm: React.FC<CommentFormProps> = ({ postId, onCommentCreat
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginBottom: 20 }}>
-      <input
-        type="text"
+    <form onSubmit={handleSubmit} style={{ marginBottom: 20 }} className="m-5">
+      <textarea
+       
         placeholder="Ваш комментарий"
         value={content}
         onChange={(e) => setContent(e.target.value)}
         disabled={isLoading}
-        style={{ width: "100%", padding: 10 }}
-      />
-      <button type="submit" disabled={isLoading || !content.trim()} style={{ marginTop: 10 }}>
+        className="bg-gray-100 rounded border border-gray-400 leading-normal w-full h-28 p-3 font-medium placeholder-gray-400 focus:outline-none focus:bg-white"
+      ></textarea>
+      <button type="submit" disabled={isLoading || !content.trim()} className="px-2.5 py-1.5 rounded-md text-white text-sm bg-indigo-500 text-lg">
         {isLoading ? "Отправка..." : "Отправить"}
       </button>
     </form>

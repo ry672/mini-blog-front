@@ -12,6 +12,7 @@ import { Headers } from "../../components/UI/Headers/Headers";
 import { userApi } from "../../store/Api/UserApi";
 
 
+
 const loginSchema = yup.object({
   userEmail: yup.string().email("Неправильный формат").required("Заполни поле"),
   userPassword: yup.string().min(6, "Минимум шесть символа").required("Заполни поле"),
@@ -47,13 +48,13 @@ export const LoginPage = () => {
       })
     );
 
-    // 🔄 Сброс кэша userApi, чтобы перезапросить /me
+    
     dispatch(userApi.util.resetApiState());
+    
 
     // 🔁 Переход после логина
     navigate("/main-page");
-  }
-}, [data, dispatch, navigate]);
+  }}, [data, dispatch, navigate]);
 
   const onSubmit: SubmitHandler<IFormSubmit> = (formData) => {
     loginUser({

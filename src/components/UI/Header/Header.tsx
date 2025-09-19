@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useGetMeQuery } from "../../../store/Api/UserApi";
 import { RootState } from "../../../store/store";
 import defaultAvatar from "../../../images/user-front-side-with-white-background.jpg";
+import createButton from "../../../images/camera-square-svgrepo-com.svg"
 
 export const Header = () => {
   const navigate = useNavigate();
@@ -23,9 +24,10 @@ export const Header = () => {
       <div className="flex items-center gap-4">
         <button
           onClick={handleCreatePost}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+          className="mr-10 flex flex justify-center gap-2 items-center focus:outline-none"
         >
-          Создать пост
+          <img src={createButton} alt="createbt" className="w-5 h-5" />
+          <span>Создать</span>
         </button>
 
         {!isLoading && user && accessToken && (

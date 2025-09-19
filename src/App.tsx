@@ -7,6 +7,7 @@ import './index.css'
 import { CreatePostForm } from "./components/UI/PostForm/PostForm";
 import { PostPage } from "./pages/PostPage/PostPage";
 import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
+import { CategoryPage } from "./pages/CategoryPage/CategoryPage";
 
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-      <div className="bg-gradient-to-br from-blue-600 to-cyan-300 min-h-screen w-full flex justify-center items-center">
+      <div className="min-h-screen w-full flex justify-center items-center">
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/register" element={<RegistrationPage />} />
@@ -22,6 +23,7 @@ function App() {
         <Route path = "/create-post" element={<CreatePostForm/>}/>
         <Route path="/posts/:postId" element={<PostPage />} />
         <Route path ="/profile" element={<ProfilePage/>}/>
+        <Route path="/categories/:id" element={<CategoryPage />} />
       </Routes>
       </div>
       </BrowserRouter>
