@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useCreatePostMutation } from "../../store/Api/PostApi";
+import { useCreatePostMutation } from "../../../store/Api/PostApi";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
-import { dataFollowers } from "../../pages/MainPage/dataMainPage";
+import { RootState } from "../../../store/store";
+import { dataFollowers } from "../../../pages/MainPage/dataMainPage";
 
 export const CreatePostForm = () => {
   const navigate = useNavigate();
@@ -58,7 +58,7 @@ export const CreatePostForm = () => {
 
     try {
       await createPost({ userId, formData: data }).unwrap();
-      navigate("/");
+      navigate("/main-page");
     } catch (err) {
       console.error("Ошибка при создании поста", err);
     }

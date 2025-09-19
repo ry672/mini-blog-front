@@ -4,6 +4,7 @@ import userSlice    from"./userSlice/userSclice";
 import { postApi } from "./Api/PostApi";
 import { commentApi } from "./Api/Commentapi";
 import { categoryApi } from "./Api/CaregoryApi";
+import { userApi } from "./Api/UserApi";
 
 export const store = configureStore({
     reducer: {
@@ -12,10 +13,11 @@ export const store = configureStore({
         [postApi.reducerPath]: postApi.reducer,
         [commentApi.reducerPath]: commentApi.reducer,
         [categoryApi.reducerPath]: categoryApi.reducer,
+        [userApi.reducerPath]: userApi.reducer,
 
     },
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat([authApi.middleware, postApi.middleware, commentApi.middleware]),
+        getDefaultMiddleware().concat([authApi.middleware, postApi.middleware, commentApi.middleware, userApi.middleware, categoryApi.middleware]),
 });
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

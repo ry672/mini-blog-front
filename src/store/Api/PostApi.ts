@@ -17,7 +17,7 @@ export interface IPost {
   likedByUser: boolean;
 }
 
-// Новый интерфейс для параметров createPost мутации
+
 export interface ICreatePostParams {
   userId: number;
   formData: FormData;
@@ -35,19 +35,23 @@ export const postApi = createApi({
       return headers;
     },
   }),
-  
+  tagTypes: ["Posts"], // ✅ Добавляем типы тегов
   endpoints: (builder) => ({
     getPosts: builder.query<IPost[], void>({
       query: () => "/posts",
+      providesTags: ["Posts"],
     }),
-    
-
+    getPostsByUserId: builder.query<IPost[], number>({
+      query: (userId) => `/posts/user/${userId}`,
+      providesTags: (_result, _error, userId) => [{ type: "Posts", id: userId }],
+    }),
     createPost: builder.mutation<IPost, { userId: number; formData: FormData }>({
       query: ({ userId, formData }) => ({
         url: `/posts/${userId}`,
         method: "POST",
         body: formData,
       }),
+      invalidatesTags: (_result, _error, { userId }) => [{ type: "Posts", id: userId }],
     }),
     getPostById: builder.query<IPost, number>({
       query: (postId) => `/posts/${postId}`,
@@ -55,7 +59,8 @@ export const postApi = createApi({
   }),
 });
 
-export const { useGetPostsQuery, useCreatePostMutation, useGetPostByIdQuery } = postApi;
+
+export const { useGetPostsQuery, useCreatePostMutation, useGetPostByIdQuery, useGetPostsByUserIdQuery, } = postApi;
 
 
 

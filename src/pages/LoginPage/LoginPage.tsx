@@ -9,6 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { AppInput } from "../../components/UI/AppInput/AppInput";
 import { AppButton } from "../../components/UI/AppButton/AppButton";
 import { Headers } from "../../components/UI/Headers/Headers";
+import { userApi } from "../../store/Api/UserApi";
 
 
 const loginSchema = yup.object({
@@ -36,17 +37,23 @@ export const LoginPage = () => {
   });
 
   useEffect(() => {
-    if (data && data.status === "success") {
-      dispatch(
-        setUser({
-          user: data.user,
-          accessToken: data.access,
-          refreshToken: data.refresh,
-        })
-      );
-      navigate("/main-page");
-    }
-  }, [data, dispatch, navigate]);
+  if (data && data.status === "success") {
+    // Сохраняем токены и данные пользователя
+    dispatch(
+      setUser({
+        user: data.user,
+        accessToken: data.access,
+        refreshToken: data.refresh,
+      })
+    );
+
+    // 🔄 Сброс кэша userApi, чтобы перезапросить /me
+    dispatch(userApi.util.resetApiState());
+
+    // 🔁 Переход после логина
+    navigate("/main-page");
+  }
+}, [data, dispatch, navigate]);
 
   const onSubmit: SubmitHandler<IFormSubmit> = (formData) => {
     loginUser({

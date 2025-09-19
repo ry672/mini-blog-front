@@ -1,14 +1,14 @@
-// store/Api/AuthApi.ts
+
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { baseUrl } from "../../utils/baseUrl";
 
-// --- Payloads
-interface ILoginUserPayload {
+
+export interface ILoginUserPayload {
   email: string;
   password: string;
 }
 
-interface IRegistrationUserPayload {
+export interface IRegistrationUserPayload {
   name: string;
   surname: string;
   username: string;
@@ -18,8 +18,8 @@ interface IRegistrationUserPayload {
   city: string;
 }
 
-// --- Responses
-interface IUser {
+
+export interface IUser {
   id: number;
   name: string;
   surname: string;
@@ -34,14 +34,14 @@ interface IUser {
   roles?: string[];
 }
 
-interface ILoginUserResponse {
+export interface ILoginUserResponse {
   status: "success";
   user: IUser;
   access: string;
   refresh: string;
 }
 
-interface IRegistrationUserResponse {
+export interface IRegistrationUserResponse {
   status: "success";
   user: IUser;
   access: string;

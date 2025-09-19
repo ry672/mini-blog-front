@@ -1,21 +1,27 @@
-// store/Api/CommentApi.ts
 
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
 import { baseUrl } from "../../utils/baseUrl";
 
-interface IComment {
+
+export interface IComment {
   id: number;
   content: string;
   userId: number;
   postId: number;
   createdAt: string;
   updatedAt: string;
-  user?: {
-    username?: string
+  author?: {
+    username?: string,
+    profile_photo?: string;
   }
+  
 }
 
+export interface CommentsListProps {
+  comments: IComment[];
+  
+}
 export const commentApi = createApi({
   reducerPath: "commentApi",
   baseQuery: fetchBaseQuery({

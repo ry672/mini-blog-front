@@ -4,8 +4,9 @@ import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { RegistrationPage } from "./pages/RegistrationPage/RegistrationPage";
 import { MainPage } from "./pages/MainPage/MainPage";
 import './index.css'
-import { CreatePostForm } from "./components/Post/Post";
+import { CreatePostForm } from "./components/UI/PostForm/PostForm";
 import { PostPage } from "./pages/PostPage/PostPage";
+import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/main-page" element={<MainPage />} />
         <Route path = "/create-post" element={<CreatePostForm/>}/>
         <Route path="/posts/:postId" element={<PostPage />} />
+        <Route path ="/profile" element={<ProfilePage/>}/>
       </Routes>
       </div>
       </BrowserRouter>
