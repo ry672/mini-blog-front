@@ -8,6 +8,7 @@ import { CreatePostForm } from "./components/UI/PostForm/PostForm";
 import { PostPage } from "./pages/PostPage/PostPage";
 import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { CategoryPage } from "./pages/CategoryPage/CategoryPage";
+import {UserPage} from "./pages/UserPage/UserPage";
 
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-      <div className="min-h-screen w-full flex justify-center items-center">
+      <div className="min-h-screen w-full flex justify-center items-center flex-col">
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/register" element={<RegistrationPage />} />
@@ -24,6 +25,7 @@ function App() {
         <Route path="/posts/:postId" element={<PostPage />} />
         <Route path ="/profile" element={<ProfilePage/>}/>
         <Route path="/categories/:id" element={<CategoryPage />} />
+        <Route path="/users/:id" element={<UserPage />} />
       </Routes>
       </div>
       </BrowserRouter>

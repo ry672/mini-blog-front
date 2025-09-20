@@ -35,7 +35,7 @@ export const commentApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Comment"], // объявляем тег
+  tagTypes: ["Comment"], 
 
   endpoints: (builder) => ({
     getCommentsByPostId: builder.query<IComment[], number>({
@@ -43,9 +43,9 @@ export const commentApi = createApi({
       providesTags: (result) =>
         result
           ? [
-              // Тег для каждого комментария
+              
               ...result.map(({ id }) => ({ type: "Comment" as const, id })),
-              // Тег для списка
+              
               { type: "Comment", id: "LIST" },
             ]
           : [{ type: "Comment", id: "LIST" }],
@@ -56,7 +56,7 @@ export const commentApi = createApi({
         method: "POST",
         body: { content },
       }),
-      invalidatesTags: [{ type: "Comment", id: "LIST" }], // обновить список после создания
+      invalidatesTags: [{ type: "Comment", id: "LIST" }], 
     }),
     deleteComment: builder.mutation<{ message: string }, number>({
       query: (commentId) => ({
@@ -64,8 +64,8 @@ export const commentApi = createApi({
         method: "DELETE",
       }),
       invalidatesTags: (_result, _error, id) => [
-        { type: "Comment", id },         // удаляем конкретный комментарий из кеша
-        { type: "Comment", id: "LIST" }, // обновляем весь список
+        { type: "Comment", id },         
+        { type: "Comment", id: "LIST" }, 
       ],
     }),
   }),

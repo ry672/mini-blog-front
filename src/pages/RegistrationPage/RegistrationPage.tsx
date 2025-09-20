@@ -12,6 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../store/userSlice/userSclice";
 import { userApi } from "../../store/Api/UserApi";
+import { postApi } from "../../store/Api/PostApi";
 
 
 
@@ -84,6 +85,7 @@ export const RegistrationPage = () => {
                 refreshToken: data.refresh,
             }));
             dispatch(userApi.util.resetApiState());
+            dispatch(postApi.util.resetApiState());
             
             navigate("/main-page");
         }

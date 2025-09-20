@@ -45,7 +45,7 @@ export const LoginPage = () => {
         user: data.user,
         accessToken: data.access,
         refreshToken: data.refresh,
-      })
+      } ) 
     );
 
     

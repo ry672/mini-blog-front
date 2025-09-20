@@ -1,22 +1,8 @@
 // store/userSlice/userSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IUser } from "../Api/UserApi";
 
-interface IUser {
-  id: number;
-  name: string;
-  surname: string;
-  username: string;
-  phone_number: string;
-  email: string;
-  refresh_token_hash?: string;
-  city: string;
-  profile_photo: string | null;
-  createdAt?: string;
-  updatedAt?: string;
-  roles?: string[];
-}
-
-interface UserState {
+export interface UserState {
   user: IUser | null;
   accessToken: string | null;
   refreshToken: string | null;
@@ -32,7 +18,14 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUser(state, action: PayloadAction<UserState>) {
+    setUser(
+      state,
+      action: PayloadAction<{
+        user: IUser;
+        accessToken: string;
+        refreshToken: string;
+      }>
+    ) {
       state.user = action.payload.user;
       state.accessToken = action.payload.accessToken;
       state.refreshToken = action.payload.refreshToken;
@@ -49,9 +42,9 @@ const userSlice = createSlice({
         state.user = { id: action.payload } as IUser;
       }
     },
-
   },
 });
 
 export const { setUser, clearUser, addUserID } = userSlice.actions;
 export default userSlice.reducer;
+

@@ -1,6 +1,7 @@
 
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { baseUrl } from "../../utils/baseUrl";
+import { IUser } from "./UserApi";
 
 
 export interface ILoginUserPayload {
@@ -19,20 +20,7 @@ export interface IRegistrationUserPayload {
 }
 
 
-export interface IUser {
-  id: number;
-  name: string;
-  surname: string;
-  username: string;
-  phone_number: string;
-  email: string;
-  refresh_token_hash?: string;
-  city: string;
-  profile_photo: string | null;
-  createdAt?: string;
-  updatedAt?: string;
-  roles?: string[];
-}
+
 
 export interface ILoginUserResponse {
   status: "success";
@@ -68,16 +56,14 @@ export const authApi = createApi({
       }),
     }),
 
-    getUserById: builder.query<IUser, number>({
-      query: (id) => `/users/${id}`,
-    }),
+    
   }),
 });
 
 export const {
   useLoginUserMutation,
   useRegisterUserMutation,
-  useGetUserByIdQuery,
+  
 } = authApi;
 
 

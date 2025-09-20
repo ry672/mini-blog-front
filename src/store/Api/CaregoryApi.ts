@@ -1,22 +1,18 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { RootState } from "../store";
 import { baseUrl } from "../../utils/baseUrl";
-import { IPost } from "./PostApi";
+import { RootState } from "../store"; // 👈 импорт RootState для доступа к токену
 
-// Интерфейс категории с постами
 export interface ICategory {
   id: number;
   name: string;
   description: string;
-  createdAt: string;
-  updatedAt: string;
-  posts?: IPost[];
+  posts?: any[];
 }
 
 export const categoryApi = createApi({
   reducerPath: "categoryApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: baseUrl,
+    baseUrl,
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as RootState).user.accessToken;
       if (token) {
@@ -25,31 +21,28 @@ export const categoryApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ["Category"],
   endpoints: (builder) => ({
-    // Получение всех категорий
     getCategories: builder.query<ICategory[], void>({
       query: () => "/categories",
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map((cat) => ({ type: "Category" as const, id: cat.id })),
+              { type: "Category", id: "LIST" },
+            ]
+          : [{ type: "Category", id: "LIST" }],
     }),
-
-    // Получение одной категории с постами по ID
     getCategoryById: builder.query<ICategory, number>({
       query: (id) => `/categories/${id}`,
-    }),
-
-    // Создание новой категории
-    createCategory: builder.mutation<ICategory, { name: string; description: string }>({
-      query: (body) => ({
-        url: "/categories",
-        method: "POST",
-        body,
-      }),
+      providesTags: (_res, _err, id) => [{ type: "Category", id }],
     }),
   }),
 });
 
-export const {
-  useGetCategoriesQuery,
-  useGetCategoryByIdQuery,
-  useCreateCategoryMutation,
-} = categoryApi;
+export const { useGetCategoriesQuery, useGetCategoryByIdQuery } = categoryApi;
+
+
+
+
 
